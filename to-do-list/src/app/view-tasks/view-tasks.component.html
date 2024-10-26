@@ -1,1 +1,6 @@
-<p>view-tasks works!</p>
+<div class="view-task-main">
+    <div class="view-task" *ngIf="viewTask">
+            <p>{{viewTask.task}}</p>
+            <button (click)="deleteTask()">Delete This Task</button>
+    </div>
+</div>
