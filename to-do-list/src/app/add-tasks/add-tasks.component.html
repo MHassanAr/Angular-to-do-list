@@ -1,1 +1,15 @@
-<p>add-tasks works!</p>
+<div class="add-task-main">
+  <div class="add-task-main-heading-div">
+    <h1 class="add-task-main-heading">Plan Your Day, Achieve Your Goals</h1>
+  </div>
+  <div class="add-task-input-div">
+    <input [(ngModel)]="currentTask" type="text" placeholder="Add a new task..." />
+    <button (click)="addTask()" class="add-task-button">Add to List</button>
+  </div>
+  <div class="show-output-div" *ngFor="let task of tasksArray">
+    <app-view-tasks
+      [viewTask]="task"
+      (taskDelete)="deleteTask($event)"
+    ></app-view-tasks>
+  </div>
+</div>
