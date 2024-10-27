@@ -2,10 +2,32 @@
   <div class="add-task-main-heading-div">
     <h1 class="add-task-main-heading">Plan Your Day, Achieve Your Goals</h1>
   </div>
+
+  <!-- Task Input and Button -->
   <div class="add-task-input-div">
-    <input [(ngModel)]="currentTask" type="text" placeholder="Add a new task..." />
-    <button (click)="addTask()" class="add-task-button">Add to List</button>
+    <input
+      [(ngModel)]="currentTask"
+      #taskInput="ngModel"
+      type="text"
+      placeholder="Add a new task..."
+      required
+      minlength="4"
+    />
+
+    <!-- Add Button, Disabled if Validation Fails -->
+    <button (click)="addTask()" class="add-task-button" [disabled]="taskInput.invalid">
+      Add to List
+    </button>
+
+    <!-- Validation Error Messages -->
+    <div class="error-message" *ngIf="taskInput.invalid && (taskInput.dirty || taskInput.touched)">
+      <p *ngIf="taskInput.errors?.['minlength']">
+        Task must be at least 4 characters long.
+      </p>
+    </div>
   </div>
+
+  <!-- Task List -->
   <div class="show-output-div" *ngFor="let task of tasksArray">
     <app-view-tasks
       [viewTask]="task"
